@@ -18,7 +18,7 @@ const wineSchema = new Schema({
   fullName: { type: String, required: true },
   year: { type: String, required: true },
   grape: { type: String, required: true },
-  flavours: { type: String, required: true },
+  flavours: { type: Array },
   character: {
     alcohol: { type: String, required: true },
     acidity: { type: String, required: true },
