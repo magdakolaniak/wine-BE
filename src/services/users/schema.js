@@ -8,6 +8,9 @@ const UserSchema = new Schema({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+  city: { type: String },
+  wines: [{ type: Schema.Types.ObjectId, ref: 'wine' }],
+
   password: { type: String },
   refreshToken: { type: String },
 });
@@ -18,6 +21,8 @@ UserSchema.methods.toJSON = function () {
   delete userObj.refreshToken;
   delete userObj.password;
   delete userObj.__v;
+
+  return userObj;
 };
 
 UserSchema.pre('save', async function () {
