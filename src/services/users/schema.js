@@ -10,7 +10,12 @@ const UserSchema = new Schema({
   email: { type: String, required: true, unique: true },
   city: { type: String },
   wines: [{ type: Schema.Types.ObjectId, ref: 'wine' }],
-
+  recipes: [
+    {
+      fullName: { type: String },
+      url: { type: String },
+    },
+  ],
   password: { type: String },
   refreshToken: { type: String },
 });

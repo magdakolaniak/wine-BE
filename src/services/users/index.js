@@ -33,6 +33,16 @@ userRouter.post('/:userId/addToList/:wineId', async (req, res, next) => {
     console.log(error);
   }
 });
+userRouter.post('/:userId/addRecipe', async (req, res, next) => {
+  try {
+    const user = await UserModel.findById(req.params.userId);
+    user.recipes = [...user.recipes, req.body];
+    const updatedUser = await user.save();
+    res.send(updatedUser);
+  } catch (error) {
+    console.log(error);
+  }
+});
 userRouter.put('/:userId/removeFromList/:wineId', async (req, res, next) => {
   try {
     const user = await UserModel.findById(req.params.userId);
@@ -42,6 +52,20 @@ userRouter.put('/:userId/removeFromList/:wineId', async (req, res, next) => {
     );
 
     user.wines = newList;
+    const updatedUser = await user.save();
+    res.send(updatedUser);
+  } catch (error) {
+    console.log(error);
+  }
+});
+userRouter.put('/:userId/removeRecipe/:recipeId', async (req, res, next) => {
+  try {
+    const user = await UserModel.findById(req.params.userId);
+    const recipes = user.recipes;
+    const newRecipes = recipes.filter(
+      (element) => element._id.toString() !== req.params.recipeId.toString()
+    );
+    user.recipes = newRecipes;
     const updatedUser = await user.save();
     res.send(updatedUser);
   } catch (error) {
