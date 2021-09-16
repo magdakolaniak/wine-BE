@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  city: { type: String },
+  city: { type: String, required: true },
   wines: [{ type: Schema.Types.ObjectId, ref: 'wine' }],
   recipes: [
     {
@@ -16,7 +16,7 @@ const UserSchema = new Schema({
       url: { type: String },
     },
   ],
-  password: { type: String },
+  password: { type: String, required: true },
   refreshToken: { type: String },
 });
 
