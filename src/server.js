@@ -5,6 +5,7 @@ import listEndpoints from 'express-list-endpoints';
 import mongoose from 'mongoose';
 import wineRouter from './services/wines/index.js';
 import userRouter from './services/users/index.js';
+import adminRouter from './services/admin/index.js';
 
 const server = express();
 
@@ -28,6 +29,7 @@ server.use(cookieParser());
 
 server.use('/wines', wineRouter);
 server.use('/user', userRouter);
+server.use('/admin', adminRouter);
 
 console.table(listEndpoints(server));
 

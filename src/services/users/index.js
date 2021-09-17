@@ -72,6 +72,17 @@ userRouter.put('/:userId/removeRecipe/:recipeId', async (req, res, next) => {
     console.log(error);
   }
 });
+userRouter.put('/edit/:id', async (req, res, next) => {
+  try {
+    const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, {
+      runValidators: true,
+      new: true,
+    });
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
 userRouter.get('/:userId/wines', async (req, res, next) => {
   try {
     const userWithWines = await UserModel.findById(req.params.userId, {
