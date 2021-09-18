@@ -5,7 +5,12 @@ import listEndpoints from 'express-list-endpoints';
 import mongoose from 'mongoose';
 import wineRouter from './services/wines/index.js';
 import userRouter from './services/users/index.js';
-import adminRouter from './services/admin/index.js';
+import {
+  badRequestErrorHandler,
+  catchAllErrorHandler,
+  forbiddenErrorHandler,
+  notFoundErrorHandler,
+} from './errorHandlers.js';
 
 const server = express();
 
@@ -29,7 +34,11 @@ server.use(cookieParser());
 
 server.use('/wines', wineRouter);
 server.use('/user', userRouter);
-server.use('/admin', adminRouter);
+
+server.use(notFoundErrorHandler);
+server.use(badRequestErrorHandler);
+server.use(forbiddenErrorHandler);
+server.use(catchAllErrorHandler);
 
 console.table(listEndpoints(server));
 
